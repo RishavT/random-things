@@ -1,0 +1,6 @@
+jshint@1.8.5
+linter@1.11.4
+linter-pylint@1.2.0
+markdown-preview-plus@2.4.0
+terminal-plus@0.14.5
+
