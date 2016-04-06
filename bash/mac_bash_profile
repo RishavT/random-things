@@ -12,7 +12,7 @@ export ARCHFLAGS="-arch x86_64"
 export PATH=${HOME}/.brew/bin:${PATH}
 
 # Brew git access token
-export HOMEBREW_GITHUB_API_TOKEN="fddbba4a1758c319211196f96ef696cce293dff4"
+export HOMEBREW_GITHUB_API_TOKEN="GIT_TOKEN_HERE"
 
 # The fuck
 eval "$(thefuck --alias)"
