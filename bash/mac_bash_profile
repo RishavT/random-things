@@ -9,13 +9,21 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 export ARCHFLAGS="-arch x86_64"
 
 # Ensure user-installed binaries take precedence
-export PATH=${HOME}/.brew/bin:${PATH}
+export PATH=${HOME}/brew/bin:${PATH}
 
 # Brew git access token
-export HOMEBREW_GITHUB_API_TOKEN="GIT_TOKEN_HERE"
+# export HOMEBREW_GITHUB_API_TOKEN="GIT_TOKEN_HERE"
 
 # The fuck
 eval "$(thefuck --alias)"
+
+# User Python bin
+export PATH=/Users/rthakker/Library/Python/2.7/bin:$PATH
+
+# User Python pip commands
+function upip {
+    pip $1 --user ${@:2}
+}
 
 # Load .bashrc if it exists
 test -f ~/.bashrc && source ~/.bashrc
