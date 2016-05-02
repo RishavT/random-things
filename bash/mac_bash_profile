@@ -5,6 +5,9 @@
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
+# Grep Colors
+alias grep='grep --color'
+
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
 
@@ -24,6 +27,24 @@ export PATH=/Users/rthakker/Library/Python/2.7/bin:$PATH
 function upip {
     pip $1 --user ${@:2}
 }
+
+# Load git autocomplete if it exists otherwise download it
+if [ -f ~/env/git-completion.bash ]
+then
+    source ~/env/git-completion.bash
+else
+    if [ ! -d ~/env ]
+    then
+        mkdir ~/env
+    fi
+    echo "Git Autocompletionn script missing. Download? (yes/no)"
+    read option
+    if [ "$option" = "yes" ]
+    then
+        curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/env/git-completion.bash
+    fi
+fi
+
 
 # Load .bashrc if it exists
 test -f ~/.bashrc && source ~/.bashrc
