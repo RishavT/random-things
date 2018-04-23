@@ -18,10 +18,10 @@ export PATH=${HOME}/brew/bin:${PATH}
 # export HOMEBREW_GITHUB_API_TOKEN="GIT_TOKEN_HERE"
 
 # The fuck
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 
 # User Python bin
-export PATH=/Users/rthakker/Library/Python/2.7/bin:$PATH
+export PATH=$HOME/Library/Python/2.7/bin:$PATH
 
 # User Python pip commands
 function upip {
@@ -48,3 +48,6 @@ fi
 
 # Load .bashrc if it exists
 test -f ~/.bashrc && source ~/.bashrc
+
+# Gstatus
+alias gstatus="git -c color.status=always status | less -r"
