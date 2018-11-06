@@ -1,0 +1,126 @@
+set wrap!
+set hlsearch
+let g:gruvbox_italic=1
+set termguicolors
+syntax on
+set number
+set splitright
+set splitbelow
+
+" Press Space to turn off highlighting and clear any message already
+" displayed.
+" TODO fix this
+" :nnoremap <silent> <C-A-Space> :nohlsearch<Bar>:echo<CR>
+
+
+" remap meta to escape key
+imap <Super> <Esc>
+
+set nocompatible              " required
+filetype off                  " required
+
+" Search visually selected text wtih //.
+" Overwrites clipboard.
+vnoremap // y/<C-R>"<CR>
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" add all your plugins here (note older versions of Vundle
+" used Bundle instead of Plugin)
+
+" NerdTree
+Plugin 'scrooloose/nerdtree'
+
+" Colour Schemes
+Plugin 'flazz/vim-colorschemes'
+
+" Install SimplyFold
+Plugin 'tmhedberg/SimpylFold'
+
+Plugin 'vim-scripts/indentpython.vim'
+
+" Auto complete
+" Install dependencies after installing using vundle
+" https://github.com/Valloric/YouCompleteMe
+Bundle 'Valloric/YouCompleteMe'
+
+" File finder
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" GitGutter - Show diffs in gutter
+Plugin 'airblade/vim-gitgutter'
+
+" ...
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+
+" Docstrings for folded code
+let g:SimpylFold_docstring_preview=1
+
+" Python indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" Remove trailing whitespaces
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" UTF-8 support
+set encoding=utf-8
+
+" Default color scheme
+colorscheme tone
+colorscheme gruvbox
+
+" NerdTree
+autocmd vimenter * NERDTree
+
+" Use system clipboard for yanking
+
+:nnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
+:nnoremap <expr> yy (v:register ==# '"' ? '"+' : '') . 'yy'
+:nnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+:xnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
+:xnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+
+:nnoremap <expr> p (v:register ==# '"' ? '"+' : '') . 'p'
+:nnoremap <expr> pp (v:register ==# '"' ? '"+' : '') . 'pp'
+:nnoremap <expr> P (v:register ==# '"' ? '"+' : '') . 'P'
+:xnoremap <expr> p (v:register ==# '"' ? '"+' : '') . 'p'
+:xnoremap <expr> P (v:register ==# '"' ? '"+' : '') . 'P'
+
+:nnoremap <expr> x (v:register ==# '"' ? '"+' : '') . 'd'
+:nnoremap <expr> xx (v:register ==# '"' ? '"+' : '') . 'xx'
+:nnoremap <expr> X (v:register ==# '"' ? '"+' : '') . 'X'
+:xnoremap <expr> x (v:register ==# '"' ? '"+' : '') . 'x'
+:xnoremap <expr> X (v:register ==# '"' ? '"+' : '') . 'X'
