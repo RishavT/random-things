@@ -24,7 +24,11 @@ filetype off                  " required
 vnoremap // y/<C-R>"<CR>
 
 " set the runtime path to include Vundle and initialize
+
+" Either comment (and write in init file) or modify the following line
+" for neovim
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 
 " alternatively, pass a path where Vundle should install plugins
