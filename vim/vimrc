@@ -27,7 +27,7 @@ vnoremap // y/<C-R>"<CR>
 
 " Either comment (and write in init file) or modify the following line
 " for neovim
-set rtp+=~/.vim/bundle/Vundle.vim
+" set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
@@ -49,6 +49,7 @@ Plugin 'flazz/vim-colorschemes'
 " Install SimplyFold
 Plugin 'tmhedberg/SimpylFold'
 
+" Python indent
 Plugin 'vim-scripts/indentpython.vim'
 
 " Auto complete
@@ -62,12 +63,24 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " GitGutter - Show diffs in gutter
 Plugin 'airblade/vim-gitgutter'
 
+" BufExplorer - Buffer management
+Plugin 'jlanzarotta/bufexplorer'
+
+" Bracket management
+Plugin 'tpope/vim-surround'
+
+" Show indent guide
+Plugin 'nathanaelkane/vim-indent-guides'
+
 " ...
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Enable indent guides
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_guide_size = 1
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -88,16 +101,18 @@ let g:SimpylFold_docstring_preview=1
 
 " Python indentation
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
 
-" Remove trailing whitespaces
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" Highlight trailing whitespaces
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
+" Remove trailing whitespace
+command Delwhite :%s/\s\+$//e
 
 " UTF-8 support
 set encoding=utf-8
@@ -105,9 +120,6 @@ set encoding=utf-8
 " Default color scheme
 colorscheme tone
 colorscheme gruvbox
-
-" NerdTree
-autocmd vimenter * NERDTree
 
 " Use system clipboard for yanking
 
