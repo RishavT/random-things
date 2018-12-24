@@ -72,6 +72,13 @@ Plugin 'tpope/vim-surround'
 " Show indent guide
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" Automatic tag generation
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+
+" Display current class/function - TagBar
+Plugin 'majutsushi/tagbar'
+
 " ...
 
 " All of your Plugins must be added before the following line
@@ -113,6 +120,59 @@ au BufNewFile,BufRead *.py
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 " Remove trailing whitespace
 command Delwhite :%s/\s\+$//e
+
+" Toggle tag bar
+nmap <F8> :TagbarToggle<CR>
+
+
+function! NextHunkAllBuffers()
+  let line = line('.')
+  GitGutterNextHunk
+  if line('.') != line
+    return
+  endif
+
+  let bufnr = bufnr('')
+  while 1
+    bnext
+    if bufnr('') == bufnr
+      return
+    endif
+    if !empty(GitGutterGetHunks())
+      normal! 1G
+      GitGutterNextHunk
+      return
+    endif
+  endwhile
+endfunction
+
+function! PrevHunkAllBuffers()
+  let line = line('.')
+  GitGutterPrevHunk
+  if line('.') != line
+    return
+  endif
+
+  let bufnr = bufnr('')
+  while 1
+    bprevious
+    if bufnr('') == bufnr
+      return
+    endif
+    if !empty(GitGutterGetHunks())
+      normal! G
+      GitGutterPrevHunk
+      return
+    endif
+  endwhile
+endfunction
+
+nmap <silent> }c :call NextHunkAllBuffers()<CR>
+nmap <silent> {c :call PrevHunkAllBuffers()<CR>
+
+
+" Custom command for pdb
+let @p = '^i€kuimport pdb; pdb.set_trace()'
 
 " UTF-8 support
 set encoding=utf-8
