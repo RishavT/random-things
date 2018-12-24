@@ -79,6 +79,9 @@ Plugin 'xolox/vim-easytags'
 " Display current class/function - TagBar
 Plugin 'majutsushi/tagbar'
 
+" Markdown Preview
+Plugin 'euclio/vim-markdown-composer'
+
 " ...
 
 " All of your Plugins must be added before the following line
@@ -105,6 +108,9 @@ nnoremap <space> za
 
 " Docstrings for folded code
 let g:SimpylFold_docstring_preview=1
+
+" Bash indentation
+autocmd FileType sh setlocal shiftwidth=4 tabstop=4
 
 " Python indentation
 au BufNewFile,BufRead *.py
