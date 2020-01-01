@@ -1,6 +1,7 @@
 ## Installation (for neovim check below):
 
 1. Copy vimrc
+2. (For vim) make sure `call vundle#begin` line is uncommented
 2. Install Vundle
 3. Run "PluginInstall" in vim
 4. Run installation instructions for YouCompleteMe (check vimrc)
@@ -8,6 +9,9 @@
 6. Enjoy
 
 ### For Neovim
+
+#### Easy option: 
+copy `init.vim` to `~/.config/nvim/init.vim`
 
 1. Install neovim
 2. Copy vimrc to your home folder

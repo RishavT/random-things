@@ -51,3 +51,6 @@ test -f ~/.bashrc && source ~/.bashrc
 
 # Gstatus
 alias gstatus="git -c color.status=always status | less -r"
+
+# Current Branch
+alias currentbranch='git branch | grep \*'

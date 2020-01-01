@@ -55,7 +55,7 @@ Plugin 'vim-scripts/indentpython.vim'
 " Auto complete
 " Install dependencies after installing using vundle
 " https://github.com/Valloric/YouCompleteMe
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " File finder
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -72,21 +72,33 @@ Plugin 'tpope/vim-surround'
 " Show indent guide
 Plugin 'nathanaelkane/vim-indent-guides'
 
-" Automatic tag generation
+" Vim misc (required for automatic tag generation)
 Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+
+" Automatic tag generation
+" Plugin 'xolox/vim-easytags'
 
 " Display current class/function - TagBar
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
-" Markdown Preview
-Plugin 'euclio/vim-markdown-composer'
+" Nerd Commenter
+" Plugin 'scrooloose/nerdcommenter'
 
 " ...
+
+" Swagger
+Plugin 'xavierchow/vim-swagger-preview'
+
+" JS Beautify
+Plugin 'maksimr/vim-jsbeautify'
+
+" Multiple Cursors
+Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+filetype plugin on
 
 " Enable indent guides
 " let g:indent_guides_enable_on_vim_startup = 1
@@ -107,13 +119,10 @@ nnoremap <space> za
 
 
 " Docstrings for folded code
-let g:SimpylFold_docstring_preview=1
-
-" Bash indentation
-autocmd FileType sh setlocal shiftwidth=4 tabstop=4
+" let g:SimpylFold_docstring_preview=1
 
 " Python indentation
-au BufNewFile,BufRead *.py
+au BufNewFile,BufRead *.py,*.js,*.html
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -206,3 +215,8 @@ colorscheme gruvbox
 :nnoremap <expr> X (v:register ==# '"' ? '"+' : '') . 'X'
 :xnoremap <expr> x (v:register ==# '"' ? '"+' : '') . 'x'
 :xnoremap <expr> X (v:register ==# '"' ? '"+' : '') . 'X'
+
+
+" Searching within visual selection - Alt + /
+:vnoremap <M-/> <Esc>/\%V
+
