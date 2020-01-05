@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import ssl
+import sys
+import os
+
+KEY = os.path.join(os.environ.get("HOME", ""), ".sslfileserverkey.pem")
+CERT = os.path.join(os.environ.get("HOME", ""), ".sslfileservercert.pem")
+PORT = 4443
+
+RETRIES = 0
+RETRY_COUNT = 3
+
+try:
+  PORT = int(sys.argv[1])
+except:
+  pass
+
+def run_server():
+
+    httpd = HTTPServer(('0.0.0.0', PORT), SimpleHTTPRequestHandler)
+
+    httpd.socket = ssl.wrap_socket (httpd.socket, keyfile=KEY, certfile=CERT, server_side=True)
+
+    httpd.serve_forever()
+
+def init(just_created=False):
+    """Checks if key exists. Creates if required"""
+    global RETRIES
+    key_exists = os.path.isfile(KEY)
+    cert_exists = os.path.isfile(CERT)
+    if key_exists and cert_exists:
+        if just_created:
+            print("Created keys. Please re-run")
+            sys.exit()
+        return
+
+    # Delete partial keys and recreate
+    if key_exists:
+        try:
+            os.remove(KEY)
+        except:
+            pass
+    if cert_exists:
+        try:
+            os.remove(CERT)
+        except:
+            pass
+
+    # Create keys
+    os.system("openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365")
+    os.system("mv ./key.pem %s" % KEY)
+    os.system("mv ./cert.pem %s" % CERT)
+
+    RETRIES += 1
+    if RETRIES > RETRY_COUNT:
+        print("Failed to create keys")
+        sys.exit(-1)
+    init(just_created=True)
+
+def main():
+    init()
+    run_server()
+
+if __name__ == "__main__":
+    main()
