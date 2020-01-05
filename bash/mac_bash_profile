@@ -54,3 +54,6 @@ alias gstatus="git -c color.status=always status | less -r"
 
 # Current Branch
 alias currentbranch='git branch | grep \*'
+
+# Simple HTTP server alias
+alias fileserve="python3 -m http.server"
