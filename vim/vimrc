@@ -1,5 +1,5 @@
-set wrap!
 set hlsearch
+set wrap!
 let g:gruvbox_italic=1
 set termguicolors
 syntax on
@@ -27,7 +27,7 @@ vnoremap // y/<C-R>"<CR>
 
 " Either comment (and write in init file) or modify the following line
 " for neovim
-" set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
@@ -46,6 +46,9 @@ Plugin 'scrooloose/nerdtree'
 " Colour Schemes
 Plugin 'flazz/vim-colorschemes'
 
+" Set Colors plugin
+Plugin 'felixhummel/setcolors.vim'
+
 " Install SimplyFold
 Plugin 'tmhedberg/SimpylFold'
 
@@ -55,10 +58,14 @@ Plugin 'vim-scripts/indentpython.vim'
 " Auto complete
 " Install dependencies after installing using vundle
 " https://github.com/Valloric/YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " File finder
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Install fzf - apt install fzf / brew install fzf
+" Map fzf oto Ctrl P
+Plugin 'junegunn/fzf'
+nmap <C-P> :FZF<CR>
 
 " GitGutter - Show diffs in gutter
 Plugin 'airblade/vim-gitgutter'
@@ -193,8 +200,7 @@ let @p = '^i€kuimport pdb; pdb.set_trace()'
 set encoding=utf-8
 
 " Default color scheme
-colorscheme tone
-colorscheme gruvbox
+colorscheme tropikos
 
 " Use system clipboard for yanking
 
