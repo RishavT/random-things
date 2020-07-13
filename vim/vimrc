@@ -41,16 +41,16 @@ Plugin 'gmarik/Vundle.vim'
 " used Bundle instead of Plugin)
 
 " NerdTree
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 
 " Colour Schemes
-Plugin 'flazz/vim-colorschemes'
+" Plugin 'flazz/vim-colorschemes'
 
 " Set Colors plugin
-Plugin 'felixhummel/setcolors.vim'
+" Plugin 'felixhummel/setcolors.vim'
 
 " Install SimplyFold
-Plugin 'tmhedberg/SimpylFold'
+" Plugin 'tmhedberg/SimpylFold'
 
 " Python indent
 Plugin 'vim-scripts/indentpython.vim'
@@ -74,13 +74,13 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'jlanzarotta/bufexplorer'
 
 " Bracket management
-Plugin 'tpope/vim-surround'
+" Plugin 'tpope/vim-surround'
 
 " Show indent guide
-Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'nathanaelkane/vim-indent-guides'
 
 " Vim misc (required for automatic tag generation)
-Plugin 'xolox/vim-misc'
+" Plugin 'xolox/vim-misc'
 
 " Automatic tag generation
 " Plugin 'xolox/vim-easytags'
@@ -94,13 +94,13 @@ Plugin 'xolox/vim-misc'
 " ...
 
 " Swagger
-Plugin 'xavierchow/vim-swagger-preview'
+" Plugin 'xavierchow/vim-swagger-preview'
 
 " JS Beautify
 Plugin 'maksimr/vim-jsbeautify'
 
 " Multiple Cursors
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -200,7 +200,9 @@ let @p = '^i€kuimport pdb; pdb.set_trace()'
 set encoding=utf-8
 
 " Default color scheme
-colorscheme tropikos
+" colorscheme tropikos
+" colorscheme gruvbox
+colorscheme slate
 
 " Use system clipboard for yanking
 
