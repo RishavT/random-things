@@ -101,6 +101,43 @@ Plugin 'maksimr/vim-jsbeautify'
 
 " Multiple Cursors
 " Plugin 'terryma/vim-multiple-cursors'
+"
+
+" jedi - jumping
+Plugin 'davidhalter/jedi-vim'
+" disable autocompletion, because we use deoplete for completion
+let g:jedi#completions_enabled = 0
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
+" Deoplete
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plugin 'deoplete-plugins/deoplete-jedi'
+let g:deoplete#enable_at_startup = 1
+
+" Status bar
+Plugin 'vim-airline/vim-airline'
+
+" Automatic brace comletion
+Plugin 'vim-scripts/auto-pairs-gentle'
+
+" Surrounding words with quotes
+Plugin 'tpope/vim-surround'
+
+" Linting
+Plugin 'neomake/neomake'
+let g:neomake_python_enabled_makers = ['flake8']
+
+" Highlight copied things
+Plugin 'machakann/vim-highlightedyank'
+" set highlight duration in ms
+let g:highlightedyank_highlight_duration = 800
+
+" Code folding
+Plugin 'tmhedberg/SimpylFold'
+
+" One dark theme
+Plugin 'joshdick/onedark.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -118,11 +155,11 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Enable folding
-set foldmethod=indent
-set foldlevel=99
-
-" Enable folding with the spacebar
-nnoremap <space> za
+" set foldmethod=indent
+" set foldlevel=99
+" 
+" " Enable folding with the spacebar
+" nnoremap <space> za
 
 
 " Docstrings for folded code
@@ -140,6 +177,9 @@ au BufNewFile,BufRead *.py,*.js,*.html
 
 " Highlight trailing whitespaces
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
+
+" Unfold by default
+au BufRead * normal zR
 " Remove trailing whitespace
 command Delwhite :%s/\s\+$//e
 
@@ -202,29 +242,34 @@ set encoding=utf-8
 " Default color scheme
 " colorscheme tropikos
 " colorscheme gruvbox
-colorscheme slate
+colorscheme onedark
 
 " Use system clipboard for yanking
 
-:nnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
-:nnoremap <expr> yy (v:register ==# '"' ? '"+' : '') . 'yy'
-:nnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
-:xnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
-:xnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+:nnoremap <expr> y (v:register ==# '"' ? '"x' : '') . 'y'
+:nnoremap <expr> yy (v:register ==# '"' ? '"x' : '') . 'yy'
+:nnoremap <expr> Y (v:register ==# '"' ? '"x' : '') . 'Y'
+:xnoremap <expr> y (v:register ==# '"' ? '"x' : '') . 'y'
+:xnoremap <expr> Y (v:register ==# '"' ? '"x' : '') . 'Y'
 
-:nnoremap <expr> p (v:register ==# '"' ? '"+' : '') . 'p'
-:nnoremap <expr> pp (v:register ==# '"' ? '"+' : '') . 'pp'
-:nnoremap <expr> P (v:register ==# '"' ? '"+' : '') . 'P'
-:xnoremap <expr> p (v:register ==# '"' ? '"+' : '') . 'p'
-:xnoremap <expr> P (v:register ==# '"' ? '"+' : '') . 'P'
+:nnoremap <expr> p (v:register ==# '"' ? '"x' : '') . 'p'
+:nnoremap <expr> pp (v:register ==# '"' ? '"x' : '') . 'pp'
+:nnoremap <expr> P (v:register ==# '"' ? '"x' : '') . 'P'
+:xnoremap <expr> p (v:register ==# '"' ? '"x' : '') . 'p'
+:xnoremap <expr> P (v:register ==# '"' ? '"x' : '') . 'P'
 
-:nnoremap <expr> x (v:register ==# '"' ? '"+' : '') . 'd'
-:nnoremap <expr> xx (v:register ==# '"' ? '"+' : '') . 'xx'
-:nnoremap <expr> X (v:register ==# '"' ? '"+' : '') . 'X'
-:xnoremap <expr> x (v:register ==# '"' ? '"+' : '') . 'x'
-:xnoremap <expr> X (v:register ==# '"' ? '"+' : '') . 'X'
+:nnoremap <expr> x (v:register ==# '"' ? '"x' : '') . 'd'
+:nnoremap <expr> xx (v:register ==# '"' ? '"x' : '') . 'xx'
+:nnoremap <expr> X (v:register ==# '"' ? '"x' : '') . 'X'
+:xnoremap <expr> x (v:register ==# '"' ? '"x' : '') . 'x'
+:xnoremap <expr> X (v:register ==# '"' ? '"x' : '') . 'X'
 
 
 " Searching within visual selection - Alt + /
 :vnoremap <M-/> <Esc>/\%V
 
+" Insert single character using Ctrl I
+:nnoremap <C-i> i_<Esc>r
+
+" Auto linting
+call neomake#configure#automake('nrwi', 500)
