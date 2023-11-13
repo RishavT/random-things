@@ -12,6 +12,14 @@ set splitbelow
 " TODO fix this
 " :nnoremap <silent> <C-A-Space> :nohlsearch<Bar>:echo<CR>
 
+" Load bashrc / zshrc
+" let &shell='zsh -c "ARGV0=sh DISPLAY=:0 ENV=~/bin/zshrc_custom exec zsh"'
+" autocmd vimenter * let &shell='zsh -i -c "ARGV0=sh DISPLAY=:0 ENV=~/bin/zshrc_custom exec zsh -i"'
+autocmd vimenter * let &shell='/bin/zsh -i'
+
+
+" Python executable
+let g:python3_host_prog = $HOME."/.pyenv/versions/3.9.7/bin/python3.9"
 
 " remap meta to escape key
 imap <Super> <Esc>
@@ -66,6 +74,8 @@ Plugin 'vim-scripts/indentpython.vim'
 " Map fzf oto Ctrl P
 Plugin 'junegunn/fzf'
 nmap <C-P> :FZF<CR>
+command -nargs=1 Fopen :call fzf#run({'source': 'find <args>', 'sink': 'e'})
+nmap <C-G> :Fopen .github<CR>
 
 " GitGutter - Show diffs in gutter
 Plugin 'airblade/vim-gitgutter'
@@ -139,6 +149,40 @@ Plugin 'tmhedberg/SimpylFold'
 " One dark theme
 Plugin 'joshdick/onedark.vim'
 
+" One colorscheme (for light)
+Plugin 'rakr/vim-one'
+"Run set background=light after selecting colorscheme=one if needed
+
+" Autoformat
+Plugin 'vim-autoformat/vim-autoformat'
+
+" Markdown auto render
+Plugin 'instant-markdown/vim-instant-markdown'
+
+" Copy path
+Plugin 'vim-scripts/copypath.vim'
+
+" Typescript
+
+Plugin 'leafgarland/typescript-vim'
+
+" React
+
+Plugin 'peitalin/vim-jsx-typescript'
+
+" Jupyter
+
+Plugin 'dccsillag/magma-nvim'
+
+" CSV
+
+Plugin 'chrisbra/csv.vim'
+
+
+" Markdown pandoc
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -165,12 +209,19 @@ nnoremap <C-H> <C-W><C-H>
 " Docstrings for folded code
 " let g:SimpylFold_docstring_preview=1
 
-" Python indentation
-au BufNewFile,BufRead *.py,*.js,*.html
+" Indentation
+au BufNewFile,BufRead *.py,*.md,*.dart
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+au BufNewFile,BufRead *.js,*.html,*.ts,*.tsx,*.vue
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
@@ -234,7 +285,8 @@ nmap <silent> {c :call PrevHunkAllBuffers()<CR>
 
 
 " Custom command for pdb
-let @p = '^i€kuimport pdb; pdb.set_trace()'
+let @o = '^i€kuimport pdb; pdb.set_trace()'
+let @p = '^i€kubreakpoint()'
 
 " UTF-8 support
 set encoding=utf-8
@@ -273,3 +325,23 @@ colorscheme onedark
 
 " Auto linting
 call neomake#configure#automake('nrwi', 500)
+
+" Instant markdown
+filetype plugin on
+let g:instant_markdown_python = 1
+
+" json pretty print
+command AutoJSON %!python -m json.tool
+
+" Black
+command Black !black %
+
+" Magma jupyter
+nnoremap <silent><expr> <LocalLeader>r  :MagmaEvaluateOperator<CR>
+nnoremap <silent>       <LocalLeader>rr :MagmaEvaluateLine<CR>
+xnoremap <silent>       <LocalLeader>r  :<C-u>MagmaEvaluateVisual<CR>
+nnoremap <silent>       <LocalLeader>rc :MagmaReevaluateCell<CR>
+nnoremap <silent>       <LocalLeader>rd :MagmaDelete<CR>
+nnoremap <silent>       <LocalLeader>ro :MagmaShowOutput<CR>
+
+let g:magma_automatically_open_output = v:false
