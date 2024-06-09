@@ -6,6 +6,8 @@
 [ -z "$C" ] && C=22
 
 echo "sweeping $A.$B.$C.*"
+echo "" > ssh.txt
+echo "" > reachable.txt
 
 # Loop through all IPs from a.b.c.1 to a.b.c.254
 for i in {1..254}; do
@@ -28,6 +30,15 @@ for i in {1..254}; do
       echo "Hostname for IP address $IP_ADDRESS could not be found."
     else
       echo "Hostname for IP address $IP_ADDRESS is $HOSTNAME."
+    fi
+
+    # Check if SSH port 22 is open
+    nc -z -w 1 $IP_ADDRESS 22
+    if [ $? -eq 0 ]; then
+      echo "SSH port 22 is open on $IP_ADDRESS."
+      echo "$IP_ADDRESS" >> ssh.txt
+    else
+      echo "SSH port 22 is not open on $IP_ADDRESS."
     fi
 
     echo "$IP_ADDRESS,$HOSTNAME" >> reachable.txt
